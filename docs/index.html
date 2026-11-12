@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TomSpecs documentation - the method, the model, CodeSpecs, the tools</title>
+<meta name="description" content="A map of the TomSpecs documentation: the project flow and gate checklists, the specification object model, CodeSpecs, the packages and the Tom AI extension.">
+<meta name="theme-color" content="#0B0E17">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<meta property="og:title" content="TomSpecs documentation - the method, the model, CodeSpecs, the tools">
+<meta property="og:description" content="A map of the TomSpecs documentation: the project flow and gate checklists, the specification object model, CodeSpecs, the packages and the Tom AI extension.">
+<meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
+<link rel="canonical" href="https://tomspecs.dev/docs/">
+</head>
+<body>
+<div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
+  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/tools/">Tools</a><a href="/get-started/">Get started</a><a href="/docs/" aria-current="page">Docs</a></nav>
+</div></header>
+<main>
+<section><div class="wrap prose">
+  <div class="eyebrow">Documentation</div>
+  <h1>The reference documents</h1>
+  <p class="lead">The TomSpecs documentation lives with its sources on GitHub. Each document is the single
+  authority for its subject; this page says which one to read for which question.</p>
+  <p class="note">Start with <a href="/get-started/#walkthrough">the walkthrough sample</a> if you are new: it shows the
+  whole method on one small project before you read any of these.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The method</h2>
+  <table>
+    <tr><th>Document</th><th>Read it for</th></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_project_flow.md">Project flow</a></td><td>The whole process: the eight phases with inputs, activities and outputs, every gate with its criteria and check methods, quality inside a phase, review rounds, roles, tooling, the issue workflow and upgrade cycles.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_gate_checklists.md">Gate checklists</a></td><td>How a gate is executed: the generic checklists, a project's own checklist, the gate report and where its evidence is kept.</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The specification object model</h2>
+  <table>
+    <tr><th>Document</th><th>Read it for</th></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/som_multiplatform_spec_model.md">The SOM</a></td><td>What the model becomes in nine languages: the facade and runtime split, the metadata tree, the Markdown and YAML formats, schema generation, validation, review annotations and team review rounds.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_model_rules.md">Model rules</a></td><td>How the model is authored: classes and fields, forms, section ids, headlines, annotations, traceability and the structural invariants the validator enforces.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_model_meta_schema.md">Metadata schema</a></td><td>The shape of <code>spec_model.meta.json</code>, the resolved class graph every runtime reads.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_model/generated-doc/outlines">Outlines</a></td><td>The class tree of each of the fourteen document types, generated from the model.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/index.md">Documentation index</a></td><td>All of it, including the generator configuration, the toolchains and every package's own documentation.</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>CodeSpecs</h2>
+  <table>
+    <tr><th>Document</th><th>Read it for</th></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/codespecs_prompt.md">Starting prompt</a></td><td>When a Phase-4 run may begin: the mechanical checks, the per-area sufficiency verdict, and the todo tree it creates.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_core_codespecs/doc/codespecs_mapping.md">Mapping</a></td><td>Which specification section feeds which code part: the parts catalogue, the generation slices, the production model with its extract artifact, and the bidirectional link between documents and code.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_core_codespecs/doc/codespecs_derivation_contract.md">Derivation contract</a></td><td>What code comes out: per annotation the inputs, the exact Dart emitted, the naming rules, a worked example, and the checks <code>validate_codespecs</code> runs.</td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Using the tools</h2>
+  <table>
+    <tr><th>Document</th><th>Read it for</th></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_clitool/doc/validating_a_document.md">Validating a document</a></td><td><code>validate_spec</code>: the three tiers, fragments of one document, the JSON report.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_clitool/README.md">CLI tools</a></td><td>Every command of <code>tom_specs_clitool</code>.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_som_dart_v0">Dart facade</a></td><td>The typed access path in Dart, its tutorial and its examples. The other eight languages have the same pair of packages beside it.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_doc_specs/README.md">DocSpecs</a></td><td>Schema validation of structured Markdown.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_vscode/blob/main/tom_vscode_extension/doc/tomspecs_agent_workflow.md">Agent workflow</a></td><td>How an agent in VS Code reads, edits and checks a specification and takes it through Phase 4, tool by tool.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_vscode/blob/main/tom_vscode_extension/doc/user_guide.md">Extension user guide</a></td><td>The Tom AI extension: chat, prompt queue, process view, todos and the rest.</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_editor_specification.md">Spec editor</a></td><td>The specification of the desktop editor, which is in development.</td></tr>
+  </table>
+</div></section>
+
+</main>
+<footer class="site-footer"><div class="wrap">
+  <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
+  <span><a href="https://github.com/al-the-bear/tom_ai_build">GitHub</a> · <a href="/impressum/">Impressum</a></span>
+</div></footer>
+</body>
+</html>

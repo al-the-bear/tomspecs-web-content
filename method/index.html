@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The TomSpecs method - phases, artifacts, quality gates</title>
-<meta name="description" content="The eight phases of TomSpecs from project idea to production code, their artifacts and quality gates.">
+<meta name="description" content="The eight phases of TomSpecs from project idea to production, their artifacts, the eight quality gates, review rounds inside the documents, the roles and the upgrade cycle.">
 <meta name="theme-color" content="#0B0E17">
 <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:title" content="The TomSpecs method - phases, artifacts, quality gates">
-<meta property="og:description" content="The eight phases of TomSpecs from project idea to production code, their artifacts and quality gates.">
+<meta property="og:description" content="The eight phases of TomSpecs from project idea to production, their artifacts, the eight quality gates, review rounds inside the documents, the roles and the upgrade cycle.">
 <meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
 <link rel="canonical" href="https://tomspecs.dev/method/">
 </head>
@@ -17,60 +17,236 @@
 <div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
 <header class="site-header"><div class="wrap">
   <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
-  <nav><a href="/">Home</a><a href="/method/" aria-current="page">Method</a><a href="/tools/">Tools</a></nav>
+  <nav><a href="/">Home</a><a href="/method/" aria-current="page">Method</a><a href="/tools/">Tools</a><a href="/get-started/">Get started</a><a href="/docs/">Docs</a></nav>
 </div></header>
 <main>
 <section><div class="wrap prose">
   <div class="eyebrow">The method</div>
-  <h1>A process with phases, artifacts and gates</h1>
-  <p class="lead">TomSpecs defines the sequence from an initial idea to production code. Every phase has the same shape:</p>
-  <ul>
-    <li><b>Inputs</b> - what must exist before the phase can begin</li>
-    <li><b>Activities</b> - the work, done by a person, an AI, or both</li>
-    <li><b>Outputs</b> - the artifacts it produces, each a structured document</li>
-    <li><b>Quality gate</b> - what must be true before the next phase starts</li>
-  </ul>
+  <h1>Eight phases, eight gates</h1>
+  <p class="lead">TomSpecs defines how a system is built with the Tom architecture - from a free-form idea through
+  specification, code specification, test derivation, implementation and acceptance to release - and how it
+  continues once the system is in production.</p>
+  <p>The architecture is fixed: a Flutter client, a Dart server, a SQL database and the standard Tom components
+  (Tom Core, user and access management, deployment, provisioning, subscriptions). Because every system is built
+  from the same parts with the same layering, a specification can be mapped mechanically onto code, and the space
+  in which an implementer can go wrong is small and well understood.</p>
+  <div class="toc">
+    <a href="#principles">Principles</a><a href="#flow">The flow</a><a href="#documents">Documents</a><a href="#phases">Phases</a>
+    <a href="#gates">Gates</a><a href="#inside">Inside a phase</a><a href="#reviews">Review rounds</a><a href="#roles">Roles</a><a href="#upgrades">Upgrades</a>
+  </div>
 </div></section>
 
-<section><div class="wrap">
-  <h2>The phases</h2>
+<section id="principles"><div class="wrap">
+  <h2>Principles</h2>
   <table>
-    <tr><th>#</th><th>Phase</th><th>Key output</th></tr>
-    <tr><td>1</td><td>Project Idea</td><td>Free-form vision and ideas <span class="mono" style="color:var(--text-faint)">(PI)</span></td></tr>
-    <tr><td>2</td><td>Solution Blueprint</td><td>A structured overview of the whole system <span class="mono" style="color:var(--text-faint)">(SBP)</span></td></tr>
-    <tr><td>3</td><td>Detailed Specifications</td><td>One structured document per concern <span class="mono" style="color:var(--text-faint)">(CLA, RSP, TOM, IFM, SAS, ATS, XDS, ISC, QAP, TRP)</span></td></tr>
-    <tr><td>4</td><td>CodeSpecs</td><td>A skeletal application: compiles, does not run yet</td></tr>
-    <tr><td>5</td><td>Test Derivation</td><td>Test cases derived from the specifications</td></tr>
-    <tr><td>6</td><td>Implementation</td><td>Working code and unit tests</td></tr>
-    <tr><td>7</td><td>Business Acceptance</td><td>Deployed, tested, accepted</td></tr>
-    <tr><td>8</td><td>Multi-Tenant</td><td>Provisioning and subscription integration <span class="mono" style="color:var(--text-faint)">(optional)</span></td></tr>
+    <tr><th>Principle</th><th>What it means</th></tr>
+    <tr><td>Traceability</td><td>Every implementation element traces back to a business requirement, and every requirement forward to code and tests.</td></tr>
+    <tr><td>Model as truth</td><td>The specification object model is the source of truth; Markdown and YAML files are renderings of it.</td></tr>
+    <tr><td>Code as spec</td><td>A skeleton that compiles but does not execute is itself a specification artifact, the bridge between documents and implementation.</td></tr>
+    <tr><td>Test-first</td><td>Tests are derived from the specification before implementation begins.</td></tr>
+    <tr><td>Incremental</td><td>Each piece is implemented and verified before the next one is started.</td></tr>
+    <tr><td>AI-driven, human-gated</td><td>AI agents produce and review the artifacts; people decide at the gates.</td></tr>
+    <tr><td>Iterative, not linear</td><td>Deliverables loop until their quality holds, and a phase is re-entered when a later one exposes a defect in it.</td></tr>
   </table>
 </div></section>
 
-<section><div class="wrap prose">
-  <h2>Levels of specification</h2>
-  <ul>
-    <li><b>Vision</b> - why the system exists, whom it serves, what problem it solves</li>
-    <li><b>Requirements</b> - what it must do, and how well</li>
-    <li><b>Architecture</b> - components, boundaries and data flow</li>
-    <li><b>Design</b> - classes, interfaces and protocols of each component</li>
-    <li><b>Implementation spec</b> - exact behaviour and edge cases, precise enough for AI to generate code</li>
-    <li><b>Test spec</b> - what must be tested and what is expected</li>
-  </ul>
-  <h2>From documents to code</h2>
-  <div class="flow">Project Idea --> Solution Blueprint --> Detailed Specifications
-                                                |
-                                         CodeSpecs gate
-                                                |
-           skeletal application  <--  generated, with back-links to the spec sections
-                                                |
-                       tests derived --> implementation --> acceptance</div>
+<section id="flow"><div class="wrap">
+  <h2>The flow at a glance</h2>
+  <pre>  1  PROJECT IDEA (PI)          notes, documents, recordings, transcripts, minutes
+        == G1 ==  idea captured and confirmed
+  2  SOLUTION BLUEPRINT (SBP)   one structured document, filled mostly by AI
+        == G2 ==  business review
+  3  DETAILED SPECIFICATIONS    CLA TOM IFM RSP ISC ATS IIS SAS XDS QAP DRM TRP
+        == G3 ==  business review
+  4  CODESPECS                  skeletal application: compiles, does not run
+        == G4 ==  engineering review, AI and script supported
+  5  TEST DERIVATION            the test suite, red before implementation
+        == G5 ==  engineering review, AI and script supported
+  6  IMPLEMENTATION             business code until every test passes
+        == G6 ==  engineering review: code quality and security
+  7  APPLICATION CANDIDATE      deployed to a test environment, tested per the QAP
+        == G7 ==  business acceptance, human sign-off mandatory
+  8  RELEASE CANDIDATE          production-ready, optional multi-tenant provisioning
+        == G8 ==  release readiness
+     PRODUCTION  -->  upgrade cycles</pre>
+  <p class="note">Every gate can fail. A failed gate returns the work to its phase, and only the failed criteria are checked again. That rework loop is the normal case, not the exception: a gate that never fails has criteria that are too weak.</p>
+  <h3>The artifact chain</h3>
+  <table>
+    <tr><th>#</th><th>Phase</th><th>Primary artifact</th><th>Form</th></tr>
+    <tr><td>1</td><td>Project Idea</td><td>PI</td><td>Free-form: notes, transcripts, sketches</td></tr>
+    <tr><td>2</td><td>Solution Blueprint</td><td>SBP</td><td>One specification document</td></tr>
+    <tr><td>3</td><td>Detailed Specifications</td><td>Twelve documents</td><td>Specification documents</td></tr>
+    <tr><td>4</td><td>CodeSpecs</td><td><code>&lt;app&gt;_codespec_{shared,client,server}</code></td><td>Dart code that compiles and does not execute</td></tr>
+    <tr><td>5</td><td>Test Derivation</td><td>Test suite</td><td>Dart tests, initially failing or skipped</td></tr>
+    <tr><td>6</td><td>Implementation</td><td><code>&lt;app&gt;_{shared,client,server}</code></td><td>Working Dart / Flutter code</td></tr>
+    <tr><td>7</td><td>Application Candidate</td><td>Deployed test system and results</td><td>Deployment and quality-plan evidence</td></tr>
+    <tr><td>8</td><td>Release Candidate</td><td>Production deployment</td><td>Deployment and provisioning configuration</td></tr>
+  </table>
+</div></section>
+
+<section id="documents"><div class="wrap">
+  <h2>The specification documents</h2>
+  <p class="section-lead">Phase 2 produces one document, Phase 3 expands it into twelve. Each is a root of the
+  specification object model with a three-letter id.</p>
+  <table>
+    <tr><th>Id</th><th>Document</th><th>Covers</th></tr>
+    <tr><td>SBP</td><td>Solution Blueprint</td><td>The whole system at overview depth - Phase 2</td></tr>
+    <tr><td>CLA</td><td>Current Landscape Assessment</td><td>The systems and processes in place today, the external-system inventory</td></tr>
+    <tr><td>TOM</td><td>Target Operating Model</td><td>How the business will work with the system</td></tr>
+    <tr><td>IFM</td><td>Information Model</td><td>Entities, attributes, relationships</td></tr>
+    <tr><td>RSP</td><td>Requirements Specification</td><td>Functional and non-functional requirements with ids and sources</td></tr>
+    <tr><td>ISC</td><td>Interaction Scenarios</td><td>How users and systems move through the application</td></tr>
+    <tr><td>ATS</td><td>Architecture &amp; Technology Specification</td><td>Components, technology and architecture decisions</td></tr>
+    <tr><td>IIS</td><td>Integration &amp; Interface Specification</td><td>External interactions: protocol, payload, errors, retries</td></tr>
+    <tr><td>SAS</td><td>Security &amp; Access Specification</td><td>Roles, entitlements, authorization rules</td></tr>
+    <tr><td>XDS</td><td>Experience Design Specification</td><td>Screens, layouts, interaction design</td></tr>
+    <tr><td>QAP</td><td>Quality &amp; Acceptance Plan</td><td>Acceptance scenarios and their pass criteria</td></tr>
+    <tr><td>DRM</td><td>Delivery Roadmap</td><td>Delivery phases with goals, deliverables and gate criteria</td></tr>
+    <tr><td>TRP</td><td>Transition &amp; Rollout Plan</td><td>Migration, rollout and go-live</td></tr>
+    <tr><td>CGP</td><td>CodeSpecs Generation Projection</td><td>Not written by anyone: a projection that routes each section to the code it feeds - Phase 4</td></tr>
+  </table>
+  <div class="prose">
+  <h3>The Blueprint is the expansion point</h3>
+  <p>Every Phase-3 document is derived from a defined region of the Solution Blueprint. The mapping is part of the
+  object model - which Blueprint section maps to which document, which document elaborates a Blueprint subtree - and a
+  validator enforces it. Phase 3 is therefore not "write twelve documents from scratch" but "expand each mapped
+  region to specification depth", a bounded, checkable and largely AI-executable task. It is also why the
+  Blueprint's gate is heavy: a defect that survives G2 is multiplied by twelve.</p>
+  </div>
+</div></section>
+
+<section id="phases"><div class="wrap">
+  <h2>The phases</h2>
+  <div class="grid">
+    <div class="card"><div class="tag">PHASE 1</div><h3>Project Idea</h3><p>Capture the vision completely, even where it is vague or contradictory - filtering is the Blueprint's job. Gather material in any form, write down every idea, sketch the boundaries, name who uses, owns and runs the system.</p></div>
+    <div class="card"><div class="tag">PHASE 2</div><h3>Solution Blueprint</h3><p>An AI fills the Blueprint from the idea; the model tells it what each section wants. Every section the idea cannot answer becomes an explicit question, not an invention. The business answers, a quality role reviews, the loop repeats until the document holds.</p></div>
+    <div class="card"><div class="tag">PHASE 3</div><h3>Detailed Specifications</h3><p>Each mapped Blueprint region is expanded in dependency order - RSP feeds TOM, ISC, SAS and QAP; IFM feeds ATS and persistence. Same concept, same term, same value everywhere; every requirement carries an id that everything downstream cites.</p></div>
+    <div class="card"><div class="tag">PHASE 4</div><h3>CodeSpecs</h3><p>The specification becomes a skeleton: screens, forms, fields and types, validations, layouts, endpoints, persistence classes, the database schema, errors, authorization. A gate at the start checks that the specification is good enough to derive code from. <a href="#codespecs">More below.</a></p></div>
+    <div class="card"><div class="tag">PHASE 5</div><h3>Test Derivation</h3><p>Acceptance tests from the scenarios and the quality plan, boundary tests from the requirements, authorization tests from SAS, data tests from IFM, integration tests from IIS. Registry suites are generated. Every test maps to its CodeSpec and requirement; all start red.</p></div>
+    <div class="card"><div class="tag">PHASE 6</div><h3>Implementation</h3><p>In dependency order: schema, data models, server endpoints, UI data models, UI actions, UI elements. For each element: confirm red, implement the minimum, green, refactor, add unit tests, commit. The framework owns security, transport and persistence - only business code is written.</p></div>
+    <div class="card"><div class="tag">PHASE 7</div><h3>Application Candidate</h3><p>Deployed to a test environment and run through the business's own quality plan: user flows end to end, the real external integrations, the non-functional targets. User documentation is derived and walked against the candidate. Defects go back to Phase 6.</p></div>
+    <div class="card"><div class="tag">PHASE 8</div><h3>Release Candidate</h3><p>Production configuration, a rehearsed rollback, monitoring, security hardening, verified data migration, a controlled rollout. Optionally multi-tenant: per-client provisioning, subscription plans, quotas and feature toggles.</p></div>
+  </div>
+</div></section>
+
+<section id="codespecs"><div class="wrap prose">
+  <h2>Phase 4 in detail: two passes with a fixed boundary</h2>
+  <p>A CodeSpec is an ordinary Dart class built on an existing Tom Core class and marked with <code>Cs*</code>
+  annotations. Phase 4 is neither a compiler pass nor free authoring; it runs in two passes:</p>
+  <table>
+    <tr><th>Pass</th><th>Done by</th><th>Produces</th></tr>
+    <tr><td>1 · Extract</td><td>The extract generator</td><td>One bounded extract per code area, holding every specification field routed to that area, verbatim and with its source. It may copy and index; it may not summarise, rephrase or choose a name.</td></tr>
+    <tr><td>2 · Author</td><td>The authoring agent</td><td>The CodeSpecs Dart, one step at a time in a fixed order, each step reading only its own extracts and following the derivation contract.</td></tr>
+  </table>
+  <p>The split exists because the two halves fail differently: a mechanical rule applied to prose invents
+  structure that is not there, and an author handed the whole specification reads the wrong parts of it.</p>
+  <p><b>The starting gate.</b> Before any code is written, the specification must be complete against its schema,
+  valid, fully routed, and - per code area - sufficient: each area's extract alone has to be enough to author it.
+  A specification with holes does not produce code with holes; it produces code with inventions. Where an input
+  is missing, the result is a <i>decision needed</i> that pauses the run until it is answered in the
+  specification.</p>
+  <p><b>The output</b> is three projects split by where the code runs: <code>_codespec_shared</code> (API contracts,
+  error results, shared enums and validations), <code>_codespec_client</code> (forms, layouts, actions, screens,
+  navigation) and <code>_codespec_server</code> (services, database, handlers, authorization, migrations, jobs).
+  Every declaration carries a back-link to the specification sections it came from, so Phases 5 and 6 read code
+  rather than reopening the documents.</p>
+</div></section>
+
+<section id="gates"><div class="wrap">
+  <h2>The quality gates</h2>
+  <p class="section-lead">An orchestrator agent evaluates every criterion, collects the evidence and writes a gate
+  report; people make the decision. Re-evaluation checks only the failed criteria; three failures in a row on one
+  criterion escalate to a person. Every gate also reviews the risk register.</p>
+  <table>
+    <tr><th>Gate</th><th>Transition</th><th>Review</th><th>Some of its criteria</th></tr>
+    <tr><td>G1</td><td>Idea captured</td><td>Business, light</td><td>Problem stated, users and owner named, rough scope, sources recorded, no blocking open questions</td></tr>
+    <tr><td>G2</td><td>Blueprint complete</td><td>Business</td><td>Schema-valid, requirements with ids and sources, numeric non-functional targets, integrations named and typed, architecture decisions with rationale, business review recorded</td></tr>
+    <tr><td>G3</td><td>Specifications complete</td><td>Business</td><td>Every required document accepted, no broken references or placeholder sections, every Blueprint region expanded, no contradictions across documents</td></tr>
+    <tr><td>G4</td><td>CodeSpecs complete</td><td>Engineering, AI + scripts</td><td>Skeleton compiles, every routed section has code, every CodeSpec back-linked, extracts verbatim, derivation contract satisfied, two runs byte-identical, open questions answered in the specification</td></tr>
+    <tr><td>G5</td><td>Test suite derived</td><td>Engineering, AI + scripts</td><td>Every CodeSpec and requirement tested, boundaries and error paths covered, each SAS rule with a permitted and a refused case, all tests red, baseline recorded</td></tr>
+    <tr><td>G6</td><td>Implementation complete</td><td>Engineering: quality + security</td><td>Analysis and formatting clean, all tests pass, no regressions, no must-fix review findings, no critical or high security findings, traceability unbroken</td></tr>
+    <tr><td>G7</td><td>Business acceptance</td><td>Business, sign-off mandatory</td><td>All acceptance scenarios pass, integrations verified against the real counterpart, targets met, documentation walked, signed acceptance record</td></tr>
+    <tr><td>G8</td><td>Release readiness</td><td>Operations</td><td>Configuration valid, rollback rehearsed, migration verified, monitoring in place, hardening done; tenant isolation, provisioning and quotas when multi-tenant</td></tr>
+  </table>
+</div></section>
+
+<section id="inside"><div class="wrap prose">
+  <h2>Quality inside a phase</h2>
+  <p>The gates sit between phases; most of the quality work happens inside them, on three levels: a phase can be
+  re-entered, each deliverable loops until it holds, and producing a derived deliverable routinely exposes a gap
+  in its basis that has to be fixed upstream first.</p>
+  <h3>The per-deliverable loop</h3>
+  <p>Every deliverable - a Blueprint section, a document, a CodeSpecs part, a test group - moves between its
+  progress role and its quality role: in progress, quality review, rework, and a human review before it is
+  approved. The quality review asks four questions: is it <b>correct</b> (the business intent), <b>consistent</b>
+  (with itself and its neighbours), <b>comprehensive</b> (edge cases, error paths, no unstated assumptions) and
+  <b>well-structured</b> (schema, ids, navigable)?</p>
+  <h3>The document sequence</h3>
+  <p>In Phases 2 and 3 each document passes <b>Draft</b> (schema-valid, required sections present) &rarr;
+  <b>Reviewed</b> (complete, faithful to its Blueprint region, no ambiguity) &rarr; <b>Verified</b> (references
+  resolve, consistent with related documents) &rarr; <b>Accepted</b>. A failure at any stage returns it to Draft
+  with a findings report, and the phase gate cannot pass until every required document is accepted.</p>
+  <h3>A step plan for Phases 2 and 3</h3>
+  <p>The work runs in fixed steps, each with its own folder: an initial version derived from the source, a
+  deepening along each document's structure, repeated rounds of questions, a structural and requirements pass and
+  a consistency round until no relevant question is left open, a final consistency iteration, and the result - a
+  document with no open question or comment left in it.</p>
+</div></section>
+
+<section id="reviews"><div class="wrap prose">
+  <h2>Review rounds happen inside the documents</h2>
+  <p>Human review and the agent's clarifications live in the specification itself, as comments, questions with
+  lettered options and inline change marks. A side file may index the questions; it never holds them - the
+  position in the text is the context. A round runs in four steps: <b>annotate</b>, <b>apply</b> one item at a time,
+  <b>record</b> each applied item in the decision log, and only then <b>remove</b> it. Annotations are never stripped
+  in bulk: an item removed before it is applied and logged is lost without trace.</p>
+  <pre>Sessions expire after 30 minutes of inactivity.
+&gt; ⬆️ **C-12** (Alexis): Too long for shared kiosk devices.
+&gt; **❓ BQ-90 — C-12 kiosk timeout:** a shorter timeout for kiosk devices only,
+&gt; or for every device?
+&gt; - **(a)** kiosk devices only, 5 minutes
+&gt; - (b) every device, 15 minutes
+&gt;
+&gt; *Recommendation:* (a). *Working assumption until answered:* (a).
+&gt;
+&gt; **Answer:** (a)</pre>
+  <p>Inline marks use CriticMarkup - <code>{~~ 30 ~&gt; 5 ~~}</code>, <code>{++ added ++}</code>,
+  <code>{-- removed --}</code> - and are accepted or rejected one by one. Team rounds hand each reviewer a copy and
+  merge the copies back, with conflicting changes shown side by side for a decision.</p>
+</div></section>
+
+<section id="roles"><div class="wrap">
+  <h2>Roles</h2>
+  <p class="section-lead">In every phase a <b>progress role</b> drives the deliverable forward and a <b>quality
+  role</b> reviews, challenges and iterates with it - a dialogue partner during the work, not a gatekeeper at the
+  end. The two must run as separate agents: one agent checking its own work is not independent verification.</p>
+  <table>
+    <tr><th>Phase</th><th>Progress role</th><th>Quality role</th><th>Specialists</th><th>People</th></tr>
+    <tr><td>1</td><td>people</td><td>-</td><td>-</td><td>Project manager, business analyst, end users</td></tr>
+    <tr><td>2-3</td><td>Specification lead</td><td>Specification quality manager</td><td>Security (3)</td><td>Project manager, business analyst, solution architect (3)</td></tr>
+    <tr><td>4</td><td>System designer</td><td>Design quality manager</td><td>Security</td><td>Solution architect</td></tr>
+    <tr><td>5-6</td><td>Developer</td><td>Development quality manager</td><td>Test manager, security</td><td>Solution architect</td></tr>
+    <tr><td>7</td><td>people</td><td>-</td><td>Test manager, security</td><td>Project manager, business analyst, end users, operations</td></tr>
+    <tr><td>8</td><td>people</td><td>-</td><td>Security</td><td>Project manager, operations</td></tr>
+  </table>
+</div></section>
+
+<section id="upgrades"><div class="wrap prose">
+  <h2>After release: upgrade cycles</h2>
+  <p>Once a system passes G8 it leaves the creation process. Changes - features, technology updates, compliance,
+  security, capacity, new external systems - run through an upgrade cycle: <b>change collection</b>, <b>impact
+  analysis</b>, <b>specification update</b>, <b>CodeSpecs update</b>, <b>test update</b>, <b>implementation</b>,
+  <b>release</b>. The previous release is the baseline and regression is the primary concern: only the affected
+  documents change, gates evaluate the delta plus the full regression suite, database changes are migrations, and
+  the traceability chain is what makes the impact set computable.</p>
+  <p>The full process definition, with every gate checklist, the role catalogue, the issue workflow and the
+  upgrade cycle, is <a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_model/doc/tom_specs_project_flow.md">the TomSpecs project flow</a>.</p>
 </div></section>
 
 </main>
 <footer class="site-footer"><div class="wrap">
   <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
-  <span><a href="/impressum/">Impressum</a></span>
+  <span><a href="https://github.com/al-the-bear/tom_ai_build">GitHub</a> · <a href="/impressum/">Impressum</a></span>
 </div></footer>
 </body>
 </html>

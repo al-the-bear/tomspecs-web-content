@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started with TomSpecs - packages, samples, a first document</title>
+<meta name="description" content="Get started with TomSpecs: run the walkthrough sample, install the Dart packages from pub.dev, validate a specification document and write one in code.">
+<meta name="theme-color" content="#0B0E17">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<meta property="og:title" content="Get started with TomSpecs - packages, samples, a first document">
+<meta property="og:description" content="Get started with TomSpecs: run the walkthrough sample, install the Dart packages from pub.dev, validate a specification document and write one in code.">
+<meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
+<link rel="canonical" href="https://tomspecs.dev/get-started/">
+</head>
+<body>
+<div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
+  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/tools/">Tools</a><a href="/get-started/" aria-current="page">Get started</a><a href="/docs/">Docs</a></nav>
+</div></header>
+<main>
+<section><div class="wrap prose">
+  <div class="eyebrow">Get started</div>
+  <h1>See it work, then use it</h1>
+  <p class="lead">The quickest way to understand TomSpecs is to watch one small project go from idea to code.
+  After that, the Dart packages on pub.dev let you validate, read and write specification documents in your own
+  project.</p>
+  <p>You need the <a href="https://dart.dev/get-dart">Dart SDK</a> 3.11 or newer and git.</p>
+  <div class="toc"><a href="#walkthrough">1 · The walkthrough</a><a href="#validate">2 · Validate a document</a><a href="#code">3 · Documents in code</a><a href="#samples">Samples</a><a href="#packages">Packages</a></div>
+</div></section>
+
+<section id="walkthrough"><div class="wrap prose">
+  <h2>1 · Watch one project go from idea to code</h2>
+  <p>The walkthrough sample takes a small project through Phases 1 to 6: the free-form idea, the Blueprint, two
+  detailed specifications, the CodeSpecs trio, the derived tests and the implementation - with all six gates
+  actually run, and a failing gate stopping the walk.</p>
+  <pre><code>git clone https://github.com/al-the-bear/tom_ai_build.git
+cd tom_ai_build/tom_specs_samples/full_lifecycle_walkthrough
+dart pub get
+dart run</code></pre>
+  <p>It stops at G6 and says why: Phases 7 and 8 need a deployment and a human signature, which a sample cannot
+  carry. Read its <a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_specs_samples/full_lifecycle_walkthrough/README.md">README</a> beside the output.</p>
+</div></section>
+
+<section id="validate"><div class="wrap prose">
+  <h2>2 · Validate a specification document</h2>
+  <p>Add the packages to a Dart project - the runtime and the generated model for reading and writing documents,
+  the CLI tools as a dev dependency:</p>
+  <pre><code>dart pub add tom_som_dart_v0 tom_som_dart_runtime dev:tom_specs_clitool</code></pre>
+  <p>Then check a document on all three tiers - it decodes against the model, it is complete against its DocSpecs
+  schema, its values and references are valid. The tool takes a <code>*.docspecs.yaml</code> or a rendered
+  <code>*.md</code> of any of the fourteen document types and detects which one it is:</p>
+  <pre><code>dart run tom_specs_clitool:validate_spec my_blueprint.docspecs.yaml</code></pre>
+  <pre>validate_spec my_blueprint.docspecs.yaml — root D00SolutionBlueprint (SBP), schema solution-blueprint
+decode   0 finding(s)
+schema   0 finding(s)
+instance 0 finding(s)
+validate_spec: all three tiers clean</pre>
+  <p>No document of your own yet? The <a href="https://github.com/al-the-bear/tom_ai_build/blob/main/tom_som_dart_v0/documents/meridian_order_management.docspecs.yaml">Meridian Order Management Blueprint</a>
+  is a complete example to validate, read and change. Exit code 0 means clean, 1 findings, 2 bad usage;
+  <code>--json</code> writes a machine-readable report, <code>--markdown-out</code> the Markdown rendition.</p>
+</div></section>
+
+<section id="code"><div class="wrap prose">
+  <h2>3 · Write a document in code</h2>
+  <p>A document is a sparse tree addressed by section-id paths. This writes two values into a Solution Blueprint and
+  serializes it to the YAML form the validator reads:</p>
+  <pre><code>import 'package:tom_som_dart_runtime/tom_som_dart_runtime.dart';
+import 'package:tom_som_dart_v0/tom_som_dart_v0.dart';
+
+void main() {
+  final doc = SpecDocument();
+  doc.setContent('SBP/content', 'A platform that unifies our order systems.');
+
+  const metrics = 'SBP/currentLandscape/CUOPME-OPER-LST';
+  final item = doc.addListItem(metrics);
+  doc.setContent('$item/content', 'Average order turnaround: 4.2 days.');
+
+  print(SpecDocumentYaml.encode(
+      document: doc, tree: d00SolutionBlueprintMetaTree, modelVersion: '1.0'));
+}</code></pre>
+  <p>The same document can be written through the generated typed classes, with named getters and setters instead
+  of paths, and inspected through the model's metadata. The package's
+  <a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_som_dart_v0/example">examples</a> show all three
+  access paths side by side.</p>
+</div></section>
+
+<section id="samples"><div class="wrap">
+  <h2>Samples</h2>
+  <p class="section-lead">Each sample is a self-contained project in
+  <a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_samples"><code>tom_specs_samples</code></a>; run it with
+  <code>dart pub get &amp;&amp; dart run</code> in its folder. Its expected output is checked in beside it.</p>
+  <table>
+    <tr><th>Sample</th><th>Teaches</th><th>Phase</th></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_samples/full_lifecycle_walkthrough">full_lifecycle_walkthrough</a></td><td>The method: one project from idea to code with every gate run. Start here.</td><td>1-6</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_samples/author_solution_blueprint">author_solution_blueprint</a></td><td>Author a specification: write through the typed facade, serialize both renditions, round-trip, validate, read a real diagnostic.</td><td>2</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_samples/phase4_codespecs_run">phase4_codespecs_run</a></td><td>Phase 4 end to end: the starting gate passing and refusing, the extract generator, the authoring agent and the validation of the generated trio.</td><td>4</td></tr>
+    <tr><td><a href="https://github.com/al-the-bear/tom_ai_build/tree/main/tom_specs_samples/build_a_specification_tool">build_a_specification_tool</a></td><td>Build tooling on TomSpecs: reflective access to the model, generic access to a document, the generated schema, the validation tiers, a completeness report.</td><td>tooling</td></tr>
+  </table>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <h2>Packages</h2>
+  <p class="section-lead">Published on pub.dev. Sources: <a href="https://github.com/al-the-bear/tom_ai_build">al-the-bear/tom_ai_build</a>.</p>
+  <table>
+    <tr><th>Package</th><th>What it is</th></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_som_dart_v0">tom_som_dart_v0</a></td><td>The generated Dart facade of the model: typed classes for all fourteen document types, the metadata tree, the DocSpecs schemas</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_som_dart_runtime">tom_som_dart_runtime</a></td><td>Documents, YAML and Markdown serialization, validation, review annotations, CodeSpecs extraction</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_specs_clitool">tom_specs_clitool</a></td><td><code>validate_spec</code>, <code>extract_answers</code>, <code>validate_codespecs</code>, <code>generate_registry_tests</code> and the model tools</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_specs_model">tom_specs_model</a></td><td>The specification object model and its reference documentation</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_specs_core">tom_specs_core</a></td><td>The annotations the model is built from</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_code_specs">tom_code_specs</a></td><td>The CodeSpecs annotation family and the back-link annotation</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_core_codespecs">tom_core_codespecs</a></td><td>The classes CodeSpecs needs that Tom Core does not provide yet; home of the CodeSpecs mapping and derivation contract</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_doc_specs">tom_doc_specs</a></td><td>DocSpecs schemas and validation</td></tr>
+    <tr><td><a href="https://pub.dev/packages/tom_doc_scanner">tom_doc_scanner</a></td><td>The Markdown parser behind DocSpecs</td></tr>
+  </table>
+  <p class="note">Not on a download site yet: the runtimes for Python, Java, JavaScript, TypeScript, Go, Rust, C and C++ (in the same repository, in source), the Tom AI VS Code extension (<a href="https://github.com/al-the-bear/tom_vscode">al-the-bear/tom_vscode</a>) and the spec editor.</p>
+</div></section>
+
+</main>
+<footer class="site-footer"><div class="wrap">
+  <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
+  <span><a href="https://github.com/al-the-bear/tom_ai_build">GitHub</a> · <a href="/impressum/">Impressum</a></span>
+</div></footer>
+</body>
+</html>

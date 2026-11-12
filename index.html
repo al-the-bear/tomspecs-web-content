@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TomSpecs - specification-driven software development with AI</title>
-<meta name="description" content="TomSpecs: a structured, specification-first process for building software with AI - typed documents, quality gates and traceable code generation.">
+<meta name="description" content="TomSpecs: a specification-first process for building software with AI - typed specification documents, eight phases with quality gates, and generated code that traces back to the specification.">
 <meta name="theme-color" content="#0B0E17">
 <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/style.css">
 <meta property="og:title" content="TomSpecs - specification-driven software development with AI">
-<meta property="og:description" content="TomSpecs: a structured, specification-first process for building software with AI - typed documents, quality gates and traceable code generation.">
+<meta property="og:description" content="TomSpecs: a specification-first process for building software with AI - typed specification documents, eight phases with quality gates, and generated code that traces back to the specification.">
 <meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
 <link rel="canonical" href="https://tomspecs.dev/">
 </head>
@@ -17,17 +17,17 @@
 <div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
 <header class="site-header"><div class="wrap">
   <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
-  <nav><a href="/" aria-current="page">Home</a><a href="/method/">Method</a><a href="/tools/">Tools</a></nav>
+  <nav><a href="/" aria-current="page">Home</a><a href="/method/">Method</a><a href="/tools/">Tools</a><a href="/get-started/">Get started</a><a href="/docs/">Docs</a></nav>
 </div></header>
 <main>
 <section class="hero"><div class="wrap">
   <div>
     <div class="eyebrow">Specification-driven development</div>
-    <h1>From the first idea to running code - <em>specified, traced, generated.</em></h1>
-    <p class="lead">TomSpecs is a structured process for building software with AI. Every phase produces a
-    typed specification document, every step passes a quality gate, and every line of generated code can be
-    traced back to the requirement it implements.</p>
-    <div class="cta"><a class="btn primary" href="/method/">The method</a><a class="btn" href="/tools/">The tools</a></div>
+    <h1>From the first idea to running code - <em>specified, gated, traced.</em></h1>
+    <p class="lead">TomSpecs is a process for building software with AI agents. The specification is a typed
+    object model, not prose: AI fills it, people decide at eight quality gates, and the code generated from it
+    cites the specification sections it comes from.</p>
+    <div class="cta"><a class="btn primary" href="/method/">The method</a><a class="btn" href="/get-started/">Get started</a><a class="btn" href="/tools/">The tools</a></div>
   </div>
   <img class="hero-logo" src="/assets/logo.svg" alt="TomSpecs bear logo">
 </div></section>
@@ -35,35 +35,46 @@
 <section><div class="wrap">
   <h2>Why specifications first</h2>
   <p class="section-lead">An AI writes code quickly, and just as quickly writes the wrong code. TomSpecs moves the
-  decisions into documents that a person reviews and a machine can check, so the code that follows is the
-  consequence of an agreed specification, not of a prompt.</p>
+  decisions into documents that a person reviews and a machine can check. The code that follows is the consequence
+  of an agreed specification, not of a prompt, and where the specification is silent the process stops and asks
+  instead of letting the generator guess.</p>
   <div class="grid">
-    <div class="card"><div class="tag">STRUCTURE</div><h3>Typed documents</h3><p>Specifications are documents with a schema: every section has an id, every field a type. Tools read, validate and edit them, not just people.</p></div>
-    <div class="card"><div class="tag">QUALITY</div><h3>Gates between phases</h3><p>A phase ends only when its gate passes: the document is complete against its schema, its values are valid, its references resolve.</p></div>
-    <div class="card"><div class="tag">TRACE</div><h3>From requirement to code</h3><p>Generated code cites the specification sections it comes from, so a change can be followed in both directions.</p></div>
-    <div class="card"><div class="tag">REVIEW</div><h3>Built-in review rounds</h3><p>Questions, comments and proposed changes live inside the documents, are answered there and are applied or rejected with a trail.</p></div>
+    <div class="card"><div class="tag">MODEL AS TRUTH</div><h3>Typed specification documents</h3><p>Fourteen document types, each a tree of sections with stable ids, typed forms and lists. Stored as YAML or Markdown, validated on three tiers, edited through the model.</p></div>
+    <div class="card"><div class="tag">AI-DRIVEN, HUMAN-GATED</div><h3>Eight phases, eight gates</h3><p>AI agents produce and review the work in pairs - a progress role and an independent quality role. A phase ends only when its gate passes; at G7 a human sign-off is mandatory.</p></div>
+    <div class="card"><div class="tag">CODE AS SPEC</div><h3>A skeleton before the code</h3><p>CodeSpecs turns the specification into an application that compiles but does not run yet: screens, forms, APIs, tables and rules, each declaration back-linked to its source section.</p></div>
+    <div class="card"><div class="tag">TEST-FIRST</div><h3>Tests before implementation</h3><p>The test suite is derived from the skeleton and the specification before any business code exists. Implementation is done when those tests pass.</p></div>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <h2>Eight phases</h2>
-  <p class="section-lead">Each phase has defined inputs, activities, outputs and a quality gate. Details on the <a href="/method/">method page</a>.</p>
+  <p class="section-lead">Each phase has defined inputs, activities, outputs and a quality gate. A failed gate sends the work back; a defect found later re-opens the phase it came from. Details on the <a href="/method/">method page</a>.</p>
   <ol class="phases">
-  <li><b>Project Idea</b><span>Free-form vision and ideas</span><div class="opt mono">PI</div></li>
-  <li><b>Solution Blueprint</b><span>A structured overview of the whole system</span><div class="opt mono">SBP</div></li>
-  <li><b>Detailed Specifications</b><span>One structured document per concern</span><div class="opt mono">CLA, RSP, TOM, IFM, SAS, ATS, XDS, ISC, QAP, TRP</div></li>
-  <li><b>CodeSpecs</b><span>A skeletal application: compiles, does not run yet</span></li>
-  <li><b>Test Derivation</b><span>Test cases derived from the specifications</span></li>
-  <li><b>Implementation</b><span>Working code and unit tests</span></li>
-  <li><b>Business Acceptance</b><span>Deployed, tested, accepted</span></li>
-  <li><b>Multi-Tenant</b><span>Provisioning and subscription integration</span><div class="opt mono">optional</div></li>
+  <li><b>Project Idea</b><span>Notes, interviews, transcripts - captured, not filtered</span><div class="opt mono">PI · G1</div></li>
+  <li><b>Solution Blueprint</b><span>One schema-bound overview of the whole system, filled mostly by AI</span><div class="opt mono">SBP · G2</div></li>
+  <li><b>Detailed Specifications</b><span>Twelve documents expanding the Blueprint to specification depth</span><div class="opt mono">CLA TOM IFM RSP ISC ATS IIS SAS XDS QAP DRM TRP · G3</div></li>
+  <li><b>CodeSpecs</b><span>A skeletal shared / client / server application that compiles</span><div class="opt mono">G4</div></li>
+  <li><b>Test Derivation</b><span>The test suite, red before any code is written</span><div class="opt mono">G5</div></li>
+  <li><b>Implementation</b><span>Business code until every test passes</span><div class="opt mono">G6</div></li>
+  <li><b>Application Candidate</b><span>Deployed for testing and accepted by the business</span><div class="opt mono">G7 · human sign-off</div></li>
+  <li><b>Release Candidate</b><span>Production-ready, optionally multi-tenant</span><div class="opt mono">G8 · then upgrade cycles</div></li>
   </ol>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Available today</h2>
+  <p class="section-lead">The object model, the validators and the CodeSpecs framework are published on pub.dev; the method and its reference documents are public on GitHub, together with runnable samples.</p>
+  <div class="grid">
+    <div class="card"><div class="tag">PUB.DEV</div><h3>Nine Dart packages</h3><p>The model, its Dart runtime and typed facade, the CLI tools and the CodeSpecs annotations.</p><a class="more" href="/get-started/#packages">Package list &rarr;</a></div>
+    <div class="card"><div class="tag">SAMPLES</div><h3>Idea to code in one walk</h3><p>A small project taken through phases 1-6 with every gate actually run - and a failing gate stopping the walk.</p><a class="more" href="/get-started/#samples">Samples &rarr;</a></div>
+    <div class="card"><div class="tag">DOCS</div><h3>The reference documents</h3><p>The project flow, the object model, the CodeSpecs mapping and derivation contract.</p><a class="more" href="/docs/">Documentation &rarr;</a></div>
+  </div>
 </div></section>
 
 </main>
 <footer class="site-footer"><div class="wrap">
   <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
-  <span><a href="/impressum/">Impressum</a></span>
+  <span><a href="https://github.com/al-the-bear/tom_ai_build">GitHub</a> · <a href="/impressum/">Impressum</a></span>
 </div></footer>
 </body>
 </html>

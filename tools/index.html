@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TomSpecs tools - DocSpecs, CodeSpecs, the Tom AI extension</title>
-<meta name="description" content="Tools for TomSpecs: structured DocSpecs documents, the TomSpecs object model, CodeSpecs code generation and the Tom AI VS Code extension.">
+<title>TomSpecs tools - the object model, DocSpecs, CodeSpecs, the Tom AI extension</title>
+<meta name="description" content="The TomSpecs toolchain: the specification object model in nine languages, DocSpecs schemas, the validators, the CodeSpecs framework and the Tom AI VS Code extension.">
 <meta name="theme-color" content="#0B0E17">
 <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/style.css">
-<meta property="og:title" content="TomSpecs tools - DocSpecs, CodeSpecs, the Tom AI extension">
-<meta property="og:description" content="Tools for TomSpecs: structured DocSpecs documents, the TomSpecs object model, CodeSpecs code generation and the Tom AI VS Code extension.">
+<meta property="og:title" content="TomSpecs tools - the object model, DocSpecs, CodeSpecs, the Tom AI extension">
+<meta property="og:description" content="The TomSpecs toolchain: the specification object model in nine languages, DocSpecs schemas, the validators, the CodeSpecs framework and the Tom AI VS Code extension.">
 <meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
 <link rel="canonical" href="https://tomspecs.dev/tools/">
 </head>
@@ -17,35 +17,80 @@
 <div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
 <header class="site-header"><div class="wrap">
   <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
-  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/tools/" aria-current="page">Tools</a></nav>
+  <nav><a href="/">Home</a><a href="/method/">Method</a><a href="/tools/" aria-current="page">Tools</a><a href="/get-started/">Get started</a><a href="/docs/">Docs</a></nav>
 </div></header>
 <main>
 <section><div class="wrap prose">
   <div class="eyebrow">The tools</div>
-  <h1>Tooling for specification-driven work</h1>
-  <p class="lead">TomSpecs is supported by tools that treat specifications as data: they read the structure,
-  check it and change it through the model instead of through text editing.</p>
+  <h1>A toolchain that treats specifications as data</h1>
+  <p class="lead">TomSpecs is not a paper method. The specification is a typed object model, and the tools read,
+  check and change it through that model - which fields exist, of what type, which Blueprint region a section
+  expands, which code a section feeds - instead of editing text.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="grid">
-    <div class="card"><div class="tag">DOCSPECS</div><h3>Structured documents</h3><p>Markdown documents that declare their schema and give every section a stable id. A validator checks a document against its schema; tools address sections by id.</p></div>
-    <div class="card"><div class="tag">MODEL</div><h3>The TomSpecs object model</h3><p>A Dart model of every TomSpecs document type: which sections exist, which forms and lists they hold, which values are allowed. Documents are stored as YAML or Markdown and edited through it.</p></div>
-    <div class="card"><div class="tag">CODESPECS</div><h3>Specifications to code</h3><p>A gate checks that a specification is complete, an extraction routes every section to the code areas it feeds, and authoring steps generate a skeletal application whose declarations cite their sources.</p></div>
-    <div class="card"><div class="tag">VS CODE</div><h3>Tom AI extension</h3><p>Editing, validating and reviewing specifications inside VS Code, a process view that walks a project through its phases and gates, and a prompt queue that hands the steps to AI agents.</p></div>
+    <div class="card"><div class="tag">MODEL</div><h3>The specification object model</h3>
+      <p>Typed classes for all fourteen document roots, written in Dart with annotations for section ids, forms, content help, Blueprint mapping and code routing. A structural validator enforces the model's own rules before anything is generated from it.</p>
+      <ul><li><code>tom_specs_core</code> - the annotations</li><li><code>tom_specs_model</code> - the model and its reference documentation</li></ul></div>
+    <div class="card"><div class="tag">NINE LANGUAGES</div><h3>Runtimes and typed facades</h3>
+      <p>From the model, a generator writes a typed facade, a JSON metadata tree and DocSpecs schemas for Dart, Python, Java, JavaScript, TypeScript, Go, Rust, C and C++, each on a runtime with generic path access, YAML and Markdown serialization, validation and review annotations. One conformance corpus holds all nine to the same behaviour.</p>
+      <ul><li><code>tom_som_dart_runtime</code>, <code>tom_som_dart_v0</code> on pub.dev</li><li>the other eight languages in source</li></ul></div>
+    <div class="card"><div class="tag">DOCSPECS</div><h3>Structured Markdown</h3>
+      <p>Markdown documents that declare their schema in a header and give every heading a stable section id. A schema says which sections are required and what they hold; the validator checks a document against it. Every TomSpecs document has a DocSpecs rendition.</p>
+      <ul><li><code>tom_doc_specs</code> - schemas and validation</li><li><code>tom_doc_scanner</code> - the Markdown parser</li></ul></div>
+    <div class="card"><div class="tag">CLI</div><h3>Validation and review tools</h3>
+      <p><code>validate_spec</code> checks any project's document on three tiers - it decodes against the model, meets its DocSpecs schema, and holds valid values and resolving references. <code>extract_answers</code> collects a review round's answers; <code>generate_registry_tests</code> writes the registry test suites of Phase 5; <code>outliner</code> renders the model's class tree.</p>
+      <ul><li><code>tom_specs_clitool</code></li></ul></div>
+    <div class="card"><div class="tag">CODESPECS</div><h3>Specifications to code</h3>
+      <p>The <code>Cs*</code> annotation family that marks a CodeSpec, the back-link annotation that cites its source sections, and the few classes Tom Core does not yet provide. The extract generator - in every runtime - routes each section to its code area; <code>validate_codespecs</code> runs the derivation contract's 41 checks over a generated project trio.</p>
+      <ul><li><code>tom_code_specs</code>, <code>tom_core_codespecs</code></li><li><code>validate_codespecs</code> in <code>tom_specs_clitool</code></li></ul></div>
+    <div class="card"><div class="tag">VS CODE</div><h3>Tom AI extension</h3>
+      <p>About sixty specification and CodeSpecs agent tools, running on the TypeScript runtime: outline, search, reflect and edit a specification in batches; annotate, answer and merge review rounds; run the CodeSpecs gate, extraction, verdicts and validation. A process view walks a quest through its phases, steps and gates, and a prompt queue hands each step to an agent.</p>
+      <ul><li>source: <a href="https://github.com/al-the-bear/tom_vscode">al-the-bear/tom_vscode</a></li><li>not yet on the Marketplace</li></ul></div>
   </div>
 </div></section>
 
 <section><div class="wrap prose">
+  <h2>How the pieces fit</h2>
+  <pre>tom_specs_core  (annotations)
+      |
+tom_specs_model (the model, 14 document roots)
+      |  generate_som
+      v
+tom_som_&lt;lang&gt;_v0  typed facade + metadata + DocSpecs schemas   x 9 languages
+tom_som_&lt;lang&gt;_runtime  documents, YAML/Markdown, validation,
+                       review annotations, CodeSpecs extraction
+      |
+      +-- tom_specs_clitool   validate_spec, extract_answers, validate_codespecs, ...
+      +-- Tom AI extension    the tomAi_spec* and CodeSpecs tools, the process view
+      +-- your own tools      read and write specifications in your language
+
+tom_code_specs + tom_core_codespecs  -&gt;  the generated CodeSpecs trio
+                                         &lt;app&gt;_codespec_{shared,client,server}</pre>
+  <h3>Every edit through the model</h3>
+  <p>Whether a person types in the editor, an agent calls a tool, or a script uses a runtime, an edit is checked
+  against the model: a path that does not exist is refused with the nearest one that does, a value of the wrong
+  type is refused with the field's type and domain, and a batch of edits is written all at once or not at all.
+  That is what makes it safe to let an agent write directly into a specification.</p>
+  <h3>In development</h3>
+  <p><b>The spec editor</b> (<code>tom_specs_editor</code>) is a desktop application for working through the
+  process: a model-driven document editor with structure browser, review and an embedded agent for Phases 2 and 3,
+  and phase surfaces for CodeSpecs and implementation. A run surface for Phase 4, the implementation and
+  acceptance views, deployment and operations follow in that order. It is not released yet.</p>
+</div></section>
+
+<section><div class="wrap prose">
   <h2>Status</h2>
-  <p>The method and the tools are developed and used inside the Tom framework workspace. Downloads,
-  documentation and examples will follow on this site.</p>
+  <p>The Dart packages are published on pub.dev and their sources and documentation are public on GitHub; the
+  other language runtimes, the VS Code extension and the editor are used from source for now. See
+  <a href="/get-started/">Get started</a> for the package list and the samples.</p>
 </div></section>
 
 </main>
 <footer class="site-footer"><div class="wrap">
   <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
-  <span><a href="/impressum/">Impressum</a></span>
+  <span><a href="https://github.com/al-the-bear/tom_ai_build">GitHub</a> · <a href="/impressum/">Impressum</a></span>
 </div></footer>
 </body>
 </html>

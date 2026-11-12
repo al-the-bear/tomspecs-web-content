@@ -1,4 +1,4 @@
-/* tomspecs.dev - initial dark theme (al_the_bear tsmapex1). The tomspecs_web quest replaces it. */
+/* tomspecs.dev - dark theme (al_the_bear tsmapex1; content pages: tom_specs tspweb1). The tomspecs_web quest replaces it. */
 :root {
   --bg: #0B0E17;
   --bg-2: #10141F;
@@ -93,6 +93,19 @@ tr:last-child td { border-bottom: 0; }
 td:first-child { font-family: var(--font-mono); color: var(--indigo-300); white-space: nowrap; }
 
 .flow { font-family: var(--font-mono); color: var(--text-soft); background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-md); padding: 16px 18px; overflow-x: auto; white-space: pre; font-size: .9rem; }
+
+/* content pages */
+pre { font-family: var(--font-mono); color: var(--text-soft); background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; overflow-x: auto; font-size: .86rem; line-height: 1.5; }
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+.prose h3 { margin-top: 1.6em; }
+.prose table { margin: 1em 0 1.4em; }
+.wide { max-width: var(--wrap); }
+.note { border-left: 3px solid var(--mint-500); background: rgba(61, 220, 151, .06); padding: 10px 14px; border-radius: 0 var(--r-sm) var(--r-sm) 0; color: var(--text-soft); margin: 1em 0; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: .92rem; margin-top: 18px; }
+.toc a { color: var(--text-soft); }
+.card ul { color: var(--text-soft); margin: .6em 0 0; padding-left: 1.1em; font-size: .93rem; }
+.card .more { display: inline-block; margin-top: 12px; font-size: .9rem; }
+td.num { font-family: var(--font-mono); color: var(--indigo-300); white-space: nowrap; }
 
 /* footer */
 .site-footer { border-top: 1px solid var(--line); margin-top: 40px; color: var(--text-faint); font-size: .88rem; }
