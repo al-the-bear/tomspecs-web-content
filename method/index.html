@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The TomSpecs method - phases, artifacts, quality gates</title>
+<meta name="description" content="The eight phases of TomSpecs from project idea to production code, their artifacts and quality gates.">
+<meta name="theme-color" content="#0B0E17">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<meta property="og:title" content="The TomSpecs method - phases, artifacts, quality gates">
+<meta property="og:description" content="The eight phases of TomSpecs from project idea to production code, their artifacts and quality gates.">
+<meta property="og:image" content="https://tomspecs.dev/assets/logo.svg">
+<link rel="canonical" href="https://tomspecs.dev/method/">
+</head>
+<body>
+<div class="preview"><div class="wrap">Preview - this site is being built. Pages and content will change.</div></div>
+<header class="site-header"><div class="wrap">
+  <a class="brand" href="/"><img src="/assets/logo.svg" alt=""><span>Tom<b>Specs</b></span></a>
+  <nav><a href="/">Home</a><a href="/method/" aria-current="page">Method</a><a href="/tools/">Tools</a></nav>
+</div></header>
+<main>
+<section><div class="wrap prose">
+  <div class="eyebrow">The method</div>
+  <h1>A process with phases, artifacts and gates</h1>
+  <p class="lead">TomSpecs defines the sequence from an initial idea to production code. Every phase has the same shape:</p>
+  <ul>
+    <li><b>Inputs</b> - what must exist before the phase can begin</li>
+    <li><b>Activities</b> - the work, done by a person, an AI, or both</li>
+    <li><b>Outputs</b> - the artifacts it produces, each a structured document</li>
+    <li><b>Quality gate</b> - what must be true before the next phase starts</li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The phases</h2>
+  <table>
+    <tr><th>#</th><th>Phase</th><th>Key output</th></tr>
+    <tr><td>1</td><td>Project Idea</td><td>Free-form vision and ideas <span class="mono" style="color:var(--text-faint)">(PI)</span></td></tr>
+    <tr><td>2</td><td>Solution Blueprint</td><td>A structured overview of the whole system <span class="mono" style="color:var(--text-faint)">(SBP)</span></td></tr>
+    <tr><td>3</td><td>Detailed Specifications</td><td>One structured document per concern <span class="mono" style="color:var(--text-faint)">(CLA, RSP, TOM, IFM, SAS, ATS, XDS, ISC, QAP, TRP)</span></td></tr>
+    <tr><td>4</td><td>CodeSpecs</td><td>A skeletal application: compiles, does not run yet</td></tr>
+    <tr><td>5</td><td>Test Derivation</td><td>Test cases derived from the specifications</td></tr>
+    <tr><td>6</td><td>Implementation</td><td>Working code and unit tests</td></tr>
+    <tr><td>7</td><td>Business Acceptance</td><td>Deployed, tested, accepted</td></tr>
+    <tr><td>8</td><td>Multi-Tenant</td><td>Provisioning and subscription integration <span class="mono" style="color:var(--text-faint)">(optional)</span></td></tr>
+  </table>
+</div></section>
+
+<section><div class="wrap prose">
+  <h2>Levels of specification</h2>
+  <ul>
+    <li><b>Vision</b> - why the system exists, whom it serves, what problem it solves</li>
+    <li><b>Requirements</b> - what it must do, and how well</li>
+    <li><b>Architecture</b> - components, boundaries and data flow</li>
+    <li><b>Design</b> - classes, interfaces and protocols of each component</li>
+    <li><b>Implementation spec</b> - exact behaviour and edge cases, precise enough for AI to generate code</li>
+    <li><b>Test spec</b> - what must be tested and what is expected</li>
+  </ul>
+  <h2>From documents to code</h2>
+  <div class="flow">Project Idea --> Solution Blueprint --> Detailed Specifications
+                                                |
+                                         CodeSpecs gate
+                                                |
+           skeletal application  <--  generated, with back-links to the spec sections
+                                                |
+                       tests derived --> implementation --> acceptance</div>
+</div></section>
+
+</main>
+<footer class="site-footer"><div class="wrap">
+  <span>TomSpecs - part of the Tom framework. See also <a href="https://enterprise-flutter.dev/">enterprise-flutter.dev</a>.</span>
+  <span><a href="/impressum/">Impressum</a></span>
+</div></footer>
+</body>
+</html>

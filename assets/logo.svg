@@ -1,0 +1,50 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TomSpecs bear logo">
+  <!-- The Tom bear of enterprise-flutter.dev, recoloured for a dark page:
+       indigo-violet face instead of blue, mint spark, and a { } bracket for specs. -->
+  <defs>
+    <linearGradient id="tsFace" x1="32" y1="28" x2="128" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9AA6FF"/>
+      <stop offset="0.55" stop-color="#6A5CF0"/>
+      <stop offset="1" stop-color="#3B2A9E"/>
+    </linearGradient>
+    <linearGradient id="tsEar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9AA6FF"/>
+      <stop offset="1" stop-color="#6A5CF0"/>
+    </linearGradient>
+    <radialGradient id="tsSpark" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#B8FFE0"/>
+      <stop offset="1" stop-color="#3DDC97"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ears -->
+  <circle cx="44" cy="42" r="22" fill="url(#tsEar)"/>
+  <circle cx="116" cy="42" r="22" fill="url(#tsEar)"/>
+  <circle cx="44" cy="42" r="9" fill="#1A1440" opacity="0.45"/>
+  <circle cx="116" cy="42" r="9" fill="#1A1440" opacity="0.45"/>
+
+  <!-- face -->
+  <rect x="26" y="40" width="108" height="104" rx="46" fill="url(#tsFace)"/>
+
+  <!-- eyes -->
+  <circle cx="62" cy="86" r="7.5" fill="#F2F0FF"/>
+  <circle cx="98" cy="86" r="7.5" fill="#F2F0FF"/>
+  <circle cx="63.5" cy="87" r="3.2" fill="#140F33"/>
+  <circle cx="99.5" cy="87" r="3.2" fill="#140F33"/>
+
+  <!-- muzzle -->
+  <rect x="60" y="104" width="40" height="30" rx="15" fill="#F2F0FF" opacity="0.94"/>
+  <path d="M80 112 v8 M80 120 q-6 5 -12 4 M80 120 q6 5 12 4" stroke="#140F33" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+  <ellipse cx="80" cy="112" rx="6.5" ry="4.5" fill="#140F33"/>
+
+  <!-- spark: the "lit-up" motif, in the TomSpecs mint -->
+  <g>
+    <circle cx="128" cy="118" r="5" fill="url(#tsSpark)"/>
+    <circle cx="140" cy="110" r="3" fill="#3DDC97" opacity="0.85"/>
+    <circle cx="139" cy="124" r="2.4" fill="#9AA6FF" opacity="0.8"/>
+  </g>
+
+  <!-- { } : specification -->
+  <path d="M10 74 q-5 0 -5 6 v6 q0 4 -3 4 q3 0 3 4 v6 q0 6 5 6" stroke="#3DDC97" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M150 74 q5 0 5 6 v6 q0 4 3 4 q-3 0 -3 4 v6 q0 6 -5 6" stroke="#3DDC97" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>

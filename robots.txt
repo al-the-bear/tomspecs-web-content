@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tomspecs.dev/sitemap.xml
